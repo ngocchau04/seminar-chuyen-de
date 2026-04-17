@@ -134,6 +134,9 @@ def main():
     parser.add_argument("--batch_size", type=int, default=32)
     parser.add_argument("--d_model", type=int, default=64)
     parser.add_argument("--d_ff", type=int, default=128)
+    parser.add_argument("--num_heads", type=int, default=1)
+    parser.add_argument("--use_padding_mask", action="store_true")
+    parser.add_argument("--dropout", type=float, default=0.0)
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--num_epochs", type=int, default=20)
     parser.add_argument("--run_all", action="store_true")
@@ -162,7 +165,20 @@ def main():
         ]
     else:
         configs = [
-            (f"Transformer_d{args.d_model}_ff{args.d_ff}", TransformerClassifier(meta["vocab_size"], args.d_model, args.d_ff, meta["max_len"], meta["num_classes"]))
+            (
+                f"Transformer_d{args.d_model}_ff{args.d_ff}",
+                TransformerClassifier(
+                    meta["vocab_size"],
+                    args.d_model,
+                    args.d_ff,
+                    meta["max_len"],
+                    meta["num_classes"],
+                    num_heads=args.num_heads,
+                    use_padding_mask=args.use_padding_mask,
+                    pad_id=meta["pad_id"],
+                    dropout=args.dropout,
+                ),
+            )
         ]
 
     summary = []

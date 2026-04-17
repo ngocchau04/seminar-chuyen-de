@@ -59,12 +59,43 @@ Da tao/sao luu 3 heatmap de phan tich:
 - `results/attention_heatmap_case2_neutral.png`
 - `results/attention_heatmap_case3_positive.png`
 
-## 3) Nhung gi chua lam xong / con thieu
+## 3) Thu tu cac buoc run de tao day du so lieu
+Chay theo dung thu tu de tai tao toan bo so lieu (test, bang so sanh, heatmap, overfitting):
+
+1. Cai dependency:
+   - `pip install -r requirements.txt`
+2. Tien xu ly du lieu:
+   - `python data_utils.py --show_stats`
+   - Kiem tra da co: `data/processed/train.pt`, `val.pt`, `test.pt`, `vocab.json`, `meta.json`
+3. Kiem tra model bat buoc:
+   - `python model.py`
+   - Luu lai log PASS cua 4 test bat buoc
+4. Huan luyen cau hinh baseline (de co moc so sanh):
+   - `python train.py --results_dir results/baseline`
+   - Lay so lieu tu: `results/baseline/summary.json`
+5. Huan luyen toan bo cau hinh bat buoc de lap bang so sanh:
+   - `python train.py --run_all --results_dir results/run_all`
+   - Lay bang ket qua tu: `results/run_all/summary.json`
+6. Huan luyen cau hinh tuy chon (multi-head + mask):
+   - `python train.py --num_heads 4 --use_padding_mask --results_dir results/optional_mh_mask`
+   - Lay so lieu tu: `results/optional_mh_mask/summary.json`
+7. Huan luyen cau hinh tuy chon (multi-head + mask + dropout):
+   - `python train.py --num_heads 4 --use_padding_mask --dropout 0.2 --results_dir results/optional_mh_mask_dropout`
+   - Lay so lieu tu: `results/optional_mh_mask_dropout/summary.json`
+8. Ve heatmap attention phuc vu phan tich:
+   - `python visualize.py --model results/run_all/model_Transformer_d128_ff256.pt --sentence "this film is absolutely terrible" --results_dir results`
+   - `python visualize.py --model results/run_all/model_Transformer_d128_ff256.pt --sentence "we discussed the movie in class at home" --results_dir results`
+   - `python visualize.py --model results/run_all/model_Transformer_d128_ff256.pt --sentence "this movie is absolutely wonderful" --results_dir results`
+9. Tong hop bao cao:
+   - So sanh train/val/test tu 3 file `summary.json`: baseline vs optional_mh_mask vs optional_mh_mask_dropout
+   - Trich anh/so lieu attention tu cac heatmap trong `results/`
+
+## 4) Nhung gi chua lam xong / con thieu
 - Chua co file bao cao PDF 6-10 trang theo muc 6 cua de.
 - Chua dong goi file `.zip` nop bai theo cau truc muc 8.
 - Chua viet day du phan "Error Analysis" 5-10 mau sai trong test set (hien moi co khung ket qua va visual).
 
-## 4) Phan tich Attention (toi thieu 3 cau)
+## 5) Phan tich Attention (toi thieu 3 cau)
 Model dung de visualize/phan tich: `results/model_Transformer_d128_ff256.pt`.
 
 ### Case 1 (negative)
@@ -100,12 +131,12 @@ Model dung de visualize/phan tich: `results/model_Transformer_d128_ff256.pt`.
   - Tu cam xuc manh tich cuc (`wonderful`) dong vai tro trung tam.
   - Hanh vi attention doi xung voi case negative (`terrible`), cho thay mo hinh hoc duoc tu khoa cam xuc.
 
-## 5) Danh gia overfitting ngan gon
+## 6) Danh gia overfitting ngan gon
 - O cau hinh lon (`d128_ff256`), train acc rat cao (gan 1.0), trong khi val/test khong tang tuong ung o cuoi epoch.
 - Dau hieu overfit nhe xuat hien sau giai doan val dat dinh (val loss/val acc bat dau dao dong).
 - Tuy nhien test acc van cao (0.9778), nen muc overfit hien tai chua gay giam ket qua test ro ret.
 
-## 6) Ket luan tam thoi
+## 7) Ket luan tam thoi
 - Phan implementation va pipeline chay da dap ung phan lon yeu cau ky thuat cua de bai.
 - Can hoan tat 2 hang muc nop bai con thieu:
   1. Bao cao PDF day du theo cau truc muc 6.

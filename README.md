@@ -58,3 +58,8 @@ python visualize.py --sentence "this film is absolutely terrible"
 - Không đổi tên hàm và tham số.
 - Dữ liệu đã có sẵn cột `split`.
 - Bộ dữ liệu này là dữ liệu mô phỏng cân bằng 3 lớp để phục vụ học Transformer.
+
+
+Thành viên:
+1. 3122411020 - Đàm Thị Ngọc Châu
+2. 3122411243 - Phan Thị Hải Vân

@@ -9,7 +9,7 @@ import torch.nn.functional as F
 # ============================================================
 # TODO 1: Sinh viên tự cài đặt scaled_dot_product_attention
 # ============================================================
-def scaled_dot_product_attention(Q, K, V):
+def scaled_dot_product_attention(Q, K, V, mask=None, attn_dropout=None):
     """
     Q, K, V: shape (batch_size, seq_len, d_k)
     Return:
@@ -19,10 +19,19 @@ def scaled_dot_product_attention(Q, K, V):
     d_k = Q.size(-1)
 
     # TODO: tinh scores = Q @ K^T / sqrt(d_k)
-    scores = torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(d_k)  # (batch, seq_len, seq_len)
+    scores = torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(d_k)
+
+    if mask is not None:
+        if mask.dtype != torch.bool:
+            mask = mask.to(torch.bool)
+        while mask.dim() < scores.dim():
+            mask = mask.unsqueeze(1)
+        scores = scores.masked_fill(~mask, torch.finfo(scores.dtype).min)
 
     # TODO: ap dung softmax tren chieu cuoi
-    weights = F.softmax(scores, dim=-1)  # (batch, seq_len, seq_len)
+    weights = F.softmax(scores, dim=-1)
+    if attn_dropout is not None:
+        weights = attn_dropout(weights)
 
     # TODO: tinh output = weights @ V
     output = torch.matmul(weights, V)  # (batch, seq_len, d_k)
@@ -46,45 +55,63 @@ class PositionalEncoding(nn.Module):
 
 
 class SelfAttention(nn.Module):
-    def __init__(self, d_model: int):
+    def __init__(self, d_model: int, num_heads: int = 1, dropout: float = 0.0):
         super().__init__()
+        assert d_model % num_heads == 0, "d_model must be divisible by num_heads"
+        self.num_heads = num_heads
+        self.head_dim = d_model // num_heads
         self.q_proj = nn.Linear(d_model, d_model)
         self.k_proj = nn.Linear(d_model, d_model)
         self.v_proj = nn.Linear(d_model, d_model)
+        self.out_proj = nn.Identity() if num_heads == 1 else nn.Linear(d_model, d_model)
+        self.attn_dropout = nn.Dropout(dropout)
 
-    def forward(self, x):
+    def forward(self, x, mask=None):
         Q = self.q_proj(x)
         K = self.k_proj(x)
         V = self.v_proj(x)
-        output, weights = scaled_dot_product_attention(Q, K, V)
+
+        if self.num_heads > 1:
+            batch_size, seq_len, _ = Q.shape
+            Q = Q.view(batch_size, seq_len, self.num_heads, self.head_dim).transpose(1, 2)
+            K = K.view(batch_size, seq_len, self.num_heads, self.head_dim).transpose(1, 2)
+            V = V.view(batch_size, seq_len, self.num_heads, self.head_dim).transpose(1, 2)
+            output, weights = scaled_dot_product_attention(Q, K, V, mask=mask, attn_dropout=self.attn_dropout)
+            output = output.transpose(1, 2).contiguous().view(batch_size, seq_len, -1)
+        else:
+            output, weights = scaled_dot_product_attention(Q, K, V, mask=mask, attn_dropout=self.attn_dropout)
+
+        output = self.out_proj(output)
         return output, weights
 
 
 class FeedForwardNetwork(nn.Module):
-    def __init__(self, d_model: int, d_ff: int):
+    def __init__(self, d_model: int, d_ff: int, dropout: float = 0.0):
         super().__init__()
         # TODO 2: Sinh vien tu cai dat FFN = Linear(d_model, d_ff) -> ReLU -> Linear(d_ff, d_model)
         self.fc1 = nn.Linear(d_model, d_ff)
         self.fc2 = nn.Linear(d_ff, d_model)
+        self.dropout = nn.Dropout(dropout)
 
     def forward(self, x):
         # TODO 3: Viet forward pass cua FFN
         x = self.fc1(x)  # (batch, seq_len, d_ff)
         x = F.relu(x)  # (batch, seq_len, d_ff)
         x = self.fc2(x)  # (batch, seq_len, d_model)
+        x = self.dropout(x)  # optional dropout sau FFN
         return x
 
 
 class TransformerEncoderBlock(nn.Module):
-    def __init__(self, d_model: int, d_ff: int):
+    def __init__(self, d_model: int, d_ff: int, num_heads: int = 1, dropout: float = 0.0):
         super().__init__()
-        self.self_attention = SelfAttention(d_model)
+        self.self_attention = SelfAttention(d_model=d_model, num_heads=num_heads, dropout=dropout)
         self.norm1 = nn.LayerNorm(d_model)
-        self.ffn = FeedForwardNetwork(d_model, d_ff)
+        self.ffn = FeedForwardNetwork(d_model, d_ff, dropout=dropout)
         self.norm2 = nn.LayerNorm(d_model)
 
-    def forward(self, x):
-        attn_out, attn_weights = self.self_attention(x)
+    def forward(self, x, mask=None):
+        attn_out, attn_weights = self.self_attention(x, mask=mask)
         x = self.norm1(x + attn_out)
         ffn_out = self.ffn(x)
         x = self.norm2(x + ffn_out)
@@ -102,18 +129,32 @@ class ClassifierHead(nn.Module):
 
 
 class TransformerClassifier(nn.Module):
-    def __init__(self, vocab_size: int, d_model: int, d_ff: int, max_len: int, num_classes: int):
+    def __init__(
+        self,
+        vocab_size: int,
+        d_model: int,
+        d_ff: int,
+        max_len: int,
+        num_classes: int,
+        num_heads: int = 1,
+        use_padding_mask: bool = False,
+        pad_id: int = 0,
+        dropout: float = 0.0,
+    ):
         super().__init__()
         self.embedding = nn.Embedding(vocab_size, d_model)
         self.pos_encoding = PositionalEncoding(d_model=d_model, max_len=max_len)
-        self.encoder = TransformerEncoderBlock(d_model=d_model, d_ff=d_ff)
+        self.encoder = TransformerEncoderBlock(d_model=d_model, d_ff=d_ff, num_heads=num_heads, dropout=dropout)
         self.classifier = ClassifierHead(d_model=d_model, num_classes=num_classes)
+        self.use_padding_mask = use_padding_mask
+        self.pad_id = pad_id
         self.last_attention_weights = None
 
     def forward(self, input_ids):
         x = self.embedding(input_ids)
         x = self.pos_encoding(x)
-        x, attn_weights = self.encoder(x)
+        mask = input_ids.ne(self.pad_id) if self.use_padding_mask else None
+        x, attn_weights = self.encoder(x, mask=mask)
         self.last_attention_weights = attn_weights
         logits = self.classifier(x)
         return logits
