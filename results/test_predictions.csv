@@ -1,0 +1,91 @@
+﻿index,text,true_label_id,true_label,pred_label_id,pred_label,correct
+0,we discussed the movie in class at home,1,neutral,1,neutral,1
+1,this movie is truly poor at home,0,negative,0,negative,1
+2,the soundtrack is available online today,1,neutral,1,neutral,1
+3,the film was remarkably fun now,2,positive,2,positive,1
+4,this was a bad watch,0,negative,0,negative,1
+5,this movie is quite poor today,0,negative,0,negative,1
+6,the ending feels surprisingly excellent for us,2,positive,2,positive,1
+7,that scene was messy today,0,negative,0,negative,1
+8,they scheduled the movie for friday this week,1,neutral,1,neutral,1
+9,this was a great watch,2,positive,2,positive,1
+10,overall it feels clearly bad for us,0,negative,2,positive,0
+11,this story is on tv tonight now,1,neutral,1,neutral,1
+12,this scene has a simple title,1,neutral,1,neutral,1
+13,this was a terrible watch tonight,0,negative,0,negative,1
+14,this movie is absolutely brilliant,2,positive,2,positive,1
+15,that scene was messy for us,0,negative,0,negative,1
+16,our teacher mentioned the soundtrack today right now,1,neutral,1,neutral,1
+17,the soundtrack sounds dreadful for me,0,negative,0,negative,1
+18,that scene was fantastic,2,positive,2,positive,1
+19,the acting is quite heartwarming for me,2,positive,2,positive,1
+20,the film was remarkably messy for me,0,negative,0,negative,1
+21,the ending feels pretty painful at home,0,negative,0,negative,1
+22,the soundtrack sounds excellent tonight,2,positive,2,positive,1
+23,i found this story poor tonight,0,negative,0,negative,1
+24,they scheduled the soundtrack for friday for us,1,neutral,1,neutral,1
+25,overall it feels really excellent,2,positive,2,positive,1
+26,that scene was brilliant at home,2,positive,2,positive,1
+27,i found this story annoying right now,0,negative,0,negative,1
+28,this was a amazing watch this week,2,positive,2,positive,1
+29,i found this story dreadful this week,0,negative,0,negative,1
+30,our teacher mentioned the opening today this week,1,neutral,1,neutral,1
+31,this plot is on tv tonight now,1,neutral,1,neutral,1
+32,the scene starts after dinner at home,1,neutral,1,neutral,1
+33,this was a excellent watch this week,2,positive,2,positive,1
+34,i found this story poor for me,0,negative,0,negative,1
+35,i watched the ending yesterday right now,1,neutral,1,neutral,1
+36,the acting is quite dreadful for us,0,negative,0,negative,1
+37,the film was truly heartwarming for us,2,positive,2,positive,1
+38,the ending feels quite painful this week,0,negative,0,negative,1
+39,the film was pretty wonderful today,2,positive,2,positive,1
+40,the soundtrack sounds excellent for me,2,positive,2,positive,1
+41,that ending has two main actors today,1,neutral,1,neutral,1
+42,this movie has a simple title,1,neutral,1,neutral,1
+43,i think the plot is bad tonight,0,negative,2,positive,0
+44,overall it feels really fun,2,positive,2,positive,1
+45,i think the plot is great right now,2,positive,2,positive,1
+46,the ending feels quite annoying lately,0,negative,0,negative,1
+47,i think the plot is boring right now,0,negative,0,negative,1
+48,the soundtrack sounds lovely right now,2,positive,2,positive,1
+49,the acting is very brilliant lately,2,positive,2,positive,1
+50,i watched the story yesterday now,1,neutral,1,neutral,1
+51,the ending feels really annoying,0,negative,0,negative,1
+52,the soundtrack sounds enjoyable at home,2,positive,2,positive,1
+53,overall it feels pretty fantastic,2,positive,2,positive,1
+54,that scene has two main actors now,1,neutral,1,neutral,1
+55,the dialogue appears in the catalog this week,1,neutral,1,neutral,1
+56,the film was surprisingly brilliant for me,2,positive,2,positive,1
+57,the soundtrack sounds poor lately,0,negative,0,negative,1
+58,the plot is available online today,1,neutral,1,neutral,1
+59,i think the plot is fantastic lately,2,positive,2,positive,1
+60,the opening includes three scenes for us,1,neutral,1,neutral,1
+61,the scene includes three scenes,1,neutral,1,neutral,1
+62,they scheduled the opening for friday at home,1,neutral,1,neutral,1
+63,the soundtrack sounds painful,0,negative,0,negative,1
+64,the film includes three scenes now,1,neutral,1,neutral,1
+65,the ending runs for ninety minutes right now,1,neutral,1,neutral,1
+66,the story starts after dinner,1,neutral,1,neutral,1
+67,the film appears in the catalog for us,1,neutral,1,neutral,1
+68,the plot appears in the catalog this week,1,neutral,1,neutral,1
+69,we discussed the ending in class at home,1,neutral,1,neutral,1
+70,the acting is very fantastic tonight,2,positive,2,positive,1
+71,that scene was poor,0,negative,0,negative,1
+72,overall it feels truly messy today,0,negative,0,negative,1
+73,the acting is really poor right now,0,negative,0,negative,1
+74,this was a heartwarming watch at home,2,positive,2,positive,1
+75,this movie is very enjoyable,2,positive,2,positive,1
+76,i found this story forgettable this week,0,negative,0,negative,1
+77,that scene was wonderful lately,2,positive,2,positive,1
+78,this performance is on tv tonight,1,neutral,1,neutral,1
+79,that ending has two main actors this week,1,neutral,1,neutral,1
+80,the ending feels remarkably awful tonight,0,negative,0,negative,1
+81,our teacher mentioned the opening today right now,1,neutral,1,neutral,1
+82,that scene was painful this week,0,negative,0,negative,1
+83,the ending feels mostly poor today,0,negative,0,negative,1
+84,i found this story painful now,0,negative,0,negative,1
+85,this movie is quite enjoyable,2,positive,2,positive,1
+86,i think the plot is amazing now,2,positive,2,positive,1
+87,this performance has a simple title right now,1,neutral,1,neutral,1
+88,overall it feels absolutely great now,2,positive,2,positive,1
+89,the soundtrack sounds excellent now,2,positive,2,positive,1
