@@ -161,7 +161,7 @@ class TransformerClassifier(nn.Module):
 
 
 # ============================================================
-# Unit tests de giang vien / sinh vien tu kiem tra model.py
+# Unit tests
 # ============================================================
 def _test_scaled_dot_product_attention():
     Q = torch.randn(2, 10, 32)

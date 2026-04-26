@@ -1,0 +1,101 @@
+﻿id,text,label_name,source,is_in_raw,has_not
+1,this movie is not bad for a weekend watch,positive,new_generated,0,1
+2,i found this story forgettable,negative,from_raw,1,0
+3,this movie is quite dreadful,negative,from_raw,1,0
+4,overall it feels clearly annoying now,negative,from_raw,1,0
+5,this movie is not good overall,negative,new_generated,0,1
+6,the soundtrack is available online,neutral,from_raw,1,0
+7,the film was absolutely wonderful this week,positive,from_raw,1,0
+8,the soundtrack is not disappointing overall,positive,new_generated,0,1
+9,the film was really dreadful today,negative,from_raw,1,0
+10,the film is not enjoyable for most viewers,negative,new_generated,0,1
+11,the film was really lovely for us,positive,from_raw,1,0
+12,the ending is not awful in this version,positive,new_generated,0,1
+13,i found this story dreadful this week,negative,from_raw,1,0
+14,i found this story awful for us,negative,from_raw,1,0
+15,this movie is not bad for a weekend watch (2),positive,new_generated,0,1
+16,that story is not convincing in many scenes,negative,new_generated,0,1
+17,the acting is very heartwarming,positive,from_raw,1,0
+18,the soundtrack is not disappointing overall (2),positive,new_generated,0,1
+19,the plot is not too good and not too bad overall,neutral,new_generated,0,1
+20,the acting is mostly heartwarming right now,positive,from_raw,1,0
+21,the acting is not strong from start to finish,negative,new_generated,0,1
+22,the film was truly brilliant right now,positive,from_raw,1,0
+23,the dialogue is surprisingly fantastic for a weekend watch,positive,new_generated,0,0
+24,this movie is quite amazing for most viewers,positive,new_generated,0,0
+25,the soundtrack seems quite normal at times,neutral,new_generated,0,0
+26,the film was truly painful today,negative,from_raw,1,0
+27,the plot is extremely amazing in many scenes,positive,new_generated,0,0
+28,the plot seems extremely normal overall,neutral,new_generated,0,0
+29,we discussed the story in class at home,neutral,from_raw,1,0
+30,that story is extremely wonderful for a weekend watch,positive,new_generated,0,0
+31,the soundtrack sounds lovely now,positive,from_raw,1,0
+32,the ending feels clearly forgettable now,negative,from_raw,1,0
+33,the story appears in the catalog right now,neutral,from_raw,1,0
+34,this movie feels quite boring for a weekend watch,negative,new_generated,0,0
+35,the film was truly boring for us,negative,from_raw,1,0
+36,this movie feels totally disappointing from start to finish,negative,new_generated,0,0
+37,the movie appears in the catalog at home,neutral,from_raw,1,0
+38,this movie is remarkably messy for me,negative,from_raw,1,0
+39,the acting is truly messy now,negative,from_raw,1,0
+40,the plot feels really weak for this genre,negative,new_generated,0,0
+41,the film seems quite acceptable for most viewers,neutral,new_generated,0,0
+42,i watched the story yesterday,neutral,from_raw,1,0
+43,the acting is quite fantastic for a weekend watch,positive,new_generated,0,0
+44,this movie seems really average overall,neutral,new_generated,0,0
+45,this soundtrack is on tv tonight now,neutral,from_raw,1,0
+46,that scene was terrible for me,negative,from_raw,1,0
+47,i think the plot is fantastic for us,positive,from_raw,1,0
+48,the film is totally enjoyable from start to finish,positive,new_generated,0,0
+49,i think the plot is amazing now,positive,from_raw,1,0
+50,our teacher mentioned the soundtrack today,neutral,from_raw,1,0
+51,the plot appears in the catalog this week,neutral,from_raw,1,0
+52,the ending feels truly boring,negative,from_raw,1,0
+53,the film runs for ninety minutes today,neutral,from_raw,1,0
+54,the opening runs for ninety minutes,neutral,from_raw,1,0
+55,the dialogue is extremely wonderful in many scenes,positive,new_generated,0,0
+56,overall it feels truly fantastic tonight,positive,from_raw,1,0
+57,the film was remarkably fun now,positive,from_raw,1,0
+58,the dialogue seems totally average at times,neutral,new_generated,0,0
+59,the ending seems surprisingly fine for this genre,neutral,new_generated,0,0
+60,the performance is available online this week,neutral,from_raw,1,0
+61,the acting feels really disappointing overall,negative,new_generated,0,0
+62,this movie has a simple title,neutral,from_raw,1,0
+63,the dialogue is surprisingly enjoyable from start to finish,positive,new_generated,0,0
+64,the acting is surprisingly great for this genre,positive,new_generated,0,0
+65,the soundtrack seems extremely okay at times,neutral,new_generated,0,0
+66,the pacing seems surprisingly acceptable from start to finish,neutral,new_generated,0,0
+67,the film was truly heartwarming for us,positive,from_raw,1,0
+68,the pacing feels really boring for most viewers,negative,new_generated,0,0
+69,the opening includes three scenes now,neutral,from_raw,1,0
+70,the film is totally amazing at times,positive,new_generated,0,0
+71,overall it feels very excellent now,positive,from_raw,1,0
+72,the acting is truly great,positive,from_raw,1,0
+73,the acting is extremely amazing overall,positive,new_generated,0,0
+74,the pacing seems quite average from start to finish,neutral,new_generated,0,0
+75,we discussed the performance in class now,neutral,from_raw,1,0
+76,that soundtrack has two main actors this week,neutral,from_raw,1,0
+77,the script is really excellent for this genre,positive,new_generated,0,0
+78,the film feels surprisingly boring overall,negative,new_generated,0,0
+79,the dialogue seems really okay in this version,neutral,new_generated,0,0
+80,the pacing seems quite standard in many scenes,neutral,new_generated,0,0
+81,i found this story annoying right now,negative,from_raw,1,0
+82,that scene was messy,negative,from_raw,1,0
+83,this movie is surprisingly excellent for me,positive,from_raw,1,0
+84,the film feels very terrible for this genre,negative,new_generated,0,0
+85,the pacing feels very messy for this genre,negative,new_generated,0,0
+86,the pacing feels extremely weak overall,negative,new_generated,0,0
+87,the script feels really messy for most viewers,negative,new_generated,0,0
+88,that story seems surprisingly average overall,neutral,new_generated,0,0
+89,overall it feels very excellent at home,positive,from_raw,1,0
+90,the dialogue seems quite okay overall,neutral,new_generated,0,0
+91,the soundtrack sounds heartwarming now,positive,from_raw,1,0
+92,the script seems totally normal from start to finish,neutral,new_generated,0,0
+93,that story seems quite acceptable at times,neutral,new_generated,0,0
+94,the acting is truly heartwarming for us,positive,from_raw,1,0
+95,the script feels really disappointing overall,negative,new_generated,0,0
+96,this performance is on tv tonight,neutral,from_raw,1,0
+97,the soundtrack feels quite boring in this version,negative,new_generated,0,0
+98,the plot is available online today,neutral,from_raw,1,0
+99,this movie seems totally okay for most viewers,neutral,new_generated,0,0
+100,our teacher mentioned the soundtrack today right now,neutral,from_raw,1,0
