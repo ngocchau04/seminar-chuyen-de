@@ -48,6 +48,7 @@ def main():
     parser.add_argument("--results_dir", type=str, default="results")
     parser.add_argument("--model", type=str, default="")
     parser.add_argument("--sentence", type=str, default="")
+    parser.add_argument("--output", type=str, default="attention_heatmap.png")
     args = parser.parse_args()
 
     processed_dir = Path(args.processed_dir)
@@ -58,10 +59,29 @@ def main():
     if args.model:
         model_path = Path(args.model)
     else:
-        candidates = sorted(results_dir.glob("model_Transformer*.pt"))
-        if not candidates:
-            raise FileNotFoundError("Khong tim thay model_Transformer*.pt trong results/. Hay chay train.py truoc.")
-        model_path = candidates[0]
+        # Prefer best Transformer model from summary.json by val_accuracy.
+        summary_path = results_dir / "summary.json"
+        model_path = None
+        if summary_path.exists():
+            with open(summary_path, "r", encoding="utf-8") as f:
+                summary = json.load(f)
+            transformer_rows = [r for r in summary if str(r.get("model_name", "")).startswith("Transformer_")]
+            if transformer_rows:
+                best_row = max(transformer_rows, key=lambda r: float(r.get("val_accuracy", -1)))
+                best_model_str = best_row.get("best_model_path", "")
+                if best_model_str:
+                    candidate_path = Path(best_model_str)
+                    if not candidate_path.is_absolute():
+                        candidate_path = Path.cwd() / candidate_path
+                    if candidate_path.exists():
+                        model_path = candidate_path
+
+        # Fallback: first Transformer checkpoint after sorting.
+        if model_path is None:
+            candidates = sorted(results_dir.glob("model_Transformer*.pt"))
+            if not candidates:
+                raise FileNotFoundError("Khong tim thay model_Transformer*.pt trong results/. Hay chay train.py truoc.")
+            model_path = candidates[0]
 
     stem = model_path.stem.replace("model_", "")
     if "d128_ff256" in stem:
@@ -97,7 +117,7 @@ def main():
     plt.title(f"Attention heatmap | pred={meta['label_names'][pred]}")
     plt.tight_layout()
 
-    out_path = results_dir / "attention_heatmap.png"
+    out_path = results_dir / args.output
     plt.savefig(out_path)
     plt.close()
 
